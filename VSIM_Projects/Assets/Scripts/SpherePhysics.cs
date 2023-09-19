@@ -10,6 +10,9 @@ public class SpherePhysics : MonoBehaviour
     [SerializeField] float SphereRadius = 1.0f;
     [SerializeField] float SphereWeight = 1.0f;
 
+    float SphereVelocity = 0.0f;
+    float SphereAcceleration = 0.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,8 +37,21 @@ public class SpherePhysics : MonoBehaviour
     
     }
 
+    // Since we have no rigidbody we need to calculate the movement ourselves
     void Move()
     {
-
+        float CurrentVelocity = FindVelocity(transform.position);
+        float CurrentAcceleration = FindAcceleration();
     }
+
+    float FindVelocity(Vector3 position)
+    {
+        return 1.0f;
+    }
+
+    float FindAcceleration()
+    {
+        return 1.0f;
+    }
+
 }
