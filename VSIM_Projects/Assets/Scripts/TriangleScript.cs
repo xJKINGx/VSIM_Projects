@@ -20,17 +20,6 @@ public class TriangleScript : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        // var finds the type so we don't have to
-        // var filter = gameObject.AddComponent<MeshFilter>();
-        // var renderer = gameObject.AddComponent<MeshRenderer>();
-
-        // var mesh = new Mesh
-        // {
-        //     vertices = Vertices,
-        //     triangles = Indices
-        // };
-
-        // filter.sharedMesh = mesh;
 
         FetchVertices();
         FetchIndices();
@@ -44,6 +33,21 @@ public class TriangleScript : MonoBehaviour
         {
             Debug.Log(Indices[i]);
         }
+
+        // var finds the type so we don't have to
+        var filter = gameObject.AddComponent<MeshFilter>();
+        var renderer = gameObject.AddComponent<MeshRenderer>();
+
+        var mesh = new Mesh
+        {
+            vertices = Vertices.ToArray(),
+            triangles = Indices.ToArray()
+        };
+
+        mesh.RecalculateNormals();
+        mesh.RecalculateTangents();
+
+        filter.sharedMesh = mesh;
     }
 
     // Update is called once per frame
@@ -88,6 +92,22 @@ public class TriangleScript : MonoBehaviour
         for (int i = 0; i < indLines.Count; i++)
         {
             Indices.Add(int.Parse(indLines[i]));
+        }
+    }
+
+    private void OnDrawGizmos() 
+    {
+        if (Vertices.Count == 0)
+        {
+            FetchVertices();
+            FetchIndices();
+        }
+
+        for (int i = 0; i < Indices.Count - 2; i += 3)
+        {
+            Gizmos.DrawLine(Vertices[Indices[i]], Vertices[Indices[i + 1]]);
+            Gizmos.DrawLine(Vertices[Indices[i + 1]], Vertices[Indices[i + 2]]);
+            Gizmos.DrawLine(Vertices[Indices[i + 2]], Vertices[Indices[i]]);
         }
     }
 }
