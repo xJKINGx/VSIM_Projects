@@ -152,7 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a5121079e5c76349bb205357e054346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TriangleInfo: {fileID: 4900000, guid: b782aa1121db4804f95437aaace49ab3, type: 3}
+  TriangleVertices: {fileID: 4900000, guid: b782aa1121db4804f95437aaace49ab3, type: 3}
+  TriangleIndices: {fileID: 4900000, guid: 768b246f6bdd4fc48ab1686b93b9fac5, type: 3}
 --- !u!4 &326042656
 Transform:
   m_ObjectHideFlags: 0

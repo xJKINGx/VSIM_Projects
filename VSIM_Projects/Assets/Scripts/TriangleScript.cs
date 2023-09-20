@@ -16,7 +16,7 @@ public class TriangleScript : MonoBehaviour
 
     Vector3 NormalVector = new Vector3(0.0f, 0.0f, 0.0f);
     List<Vector3> Vertices = new List<Vector3>();
-    int[] Indices;
+    List<int> Indices = new List<int>();
     // Start is called before the first frame update
     void Awake()
     {
@@ -31,14 +31,18 @@ public class TriangleScript : MonoBehaviour
         // };
 
         // filter.sharedMesh = mesh;
-       //Debug.Log(TriangleInfo.text);
-       //Debug.Log(TriangleInfo.text.ToString());
-       // Debug.Log(TriangleInfo.dataSize);
 
         FetchVertices();
+        FetchIndices();
+        //Debug.Log("VERTICES:");
         for (int i = 0; i < Vertices.Count; i++)
         {
             Debug.Log("(" + Vertices[i][0] + ", " + Vertices[i][1] + ", " + Vertices[i][2] + ")");
+        }
+        //Debug.Log("INDICES:");
+        for (int i = 0; i < Indices.Count; i++)
+        {
+            Debug.Log(Indices[i]);
         }
     }
 
@@ -56,10 +60,10 @@ public class TriangleScript : MonoBehaviour
     
     void FetchVertices()
     {
-        string text = TriangleVertices.text;
+        string vertText = TriangleVertices.text;
 
         Vector3 Vertex;
-        List<string> lines = text.Split(new string[] {"\r\n","\r", "\n"}, StringSplitOptions.RemoveEmptyEntries).ToList<string>();
+        List<string> lines = vertText.Split(new string[] {"\r\n","\r", "\n"}, StringSplitOptions.RemoveEmptyEntries).ToList<string>();
         List<string> stringVertex = new List<string>();
 
         for (int i = 0; i < lines.Count; i++)
@@ -77,6 +81,13 @@ public class TriangleScript : MonoBehaviour
 
     void FetchIndices()
     {
-        
+        string indText = TriangleIndices.text;
+
+        List<string> indLines = indText.Split(new string[] {"\r\n", "\r", "\n"}, StringSplitOptions.RemoveEmptyEntries).ToList<string>();
+
+        for (int i = 0; i < indLines.Count; i++)
+        {
+            Indices.Add(int.Parse(indLines[i]));
+        }
     }
 }
