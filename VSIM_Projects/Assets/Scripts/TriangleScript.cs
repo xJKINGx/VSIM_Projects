@@ -13,12 +13,13 @@ public class TriangleScript : MonoBehaviour
 
     [SerializeField] TextAsset TriangleVertices;
     [SerializeField] TextAsset TriangleIndices;
+    public static TriangleScript Instance; 
 
     Vector3 NormalVector = new Vector3(0.0f, 0.0f, 0.0f);
-    List<Vector3> Vertices = new List<Vector3>();
-    int VertAmount;
-    List<int> Indices = new List<int>();
-    int IndAmount;
+    public List<Vector3> Vertices = new List<Vector3>();
+    public int VertAmount;
+    public List<int> Indices = new List<int>();
+    public int IndAmount;
     // Start is called before the first frame update
     void Awake()
     {
