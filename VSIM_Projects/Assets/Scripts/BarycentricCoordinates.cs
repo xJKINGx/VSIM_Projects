@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class BarycentricCoordinates : MonoBehaviour
 {
+	//public static BarycentricCoordinates barycInstance; 
+
 	float HeightFromBaryc(Vector2 playerPos)
 	{
 		Vector3 v0 = new Vector3();
@@ -12,17 +14,17 @@ public class BarycentricCoordinates : MonoBehaviour
 		Vector3 v2 = new Vector3();
 		Vector3 baryc = new Vector3(-1, -1, -1);
 
-		for (int i = 0; i < TriangleScript.Instance.IndAmount / 3; i++)
+		for (int i = 0; i < TriangleScript.triangleInstance.IndAmount / 3; i++)
 		{
 
 			int i1, i2, i3;
-			i1 = TriangleScript.Instance.Indices[i * 3];
-			i2 = TriangleScript.Instance.Indices[i * 3 + 1];
-			i3 = TriangleScript.Instance.Indices[i * 3 + 2];
+			i1 = TriangleScript.triangleInstance.Indices[i * 3];
+			i2 = TriangleScript.triangleInstance.Indices[i * 3 + 1];
+			i3 = TriangleScript.triangleInstance.Indices[i * 3 + 2];
 
-			v0 = TriangleScript.Instance.Vertices[i1];
-			v1 = TriangleScript.Instance.Vertices[i2];
-			v2 = TriangleScript.Instance.Vertices[i3];
+			v0 = TriangleScript.triangleInstance.Vertices[i1];
+			v1 = TriangleScript.triangleInstance.Vertices[i2];
+			v2 = TriangleScript.triangleInstance.Vertices[i3];
 
 			baryc = CalcBarycentricCoords(new Vector2(v0.x, v0.z), new Vector2(v1.x, v1.z), new Vector2(v2.x, v2.z), playerPos);
 
@@ -56,5 +58,28 @@ public class BarycentricCoordinates : MonoBehaviour
 		Vector3 tempBaryc = new Vector3(u, v, w);
 
 		return tempBaryc;
+	}
+
+	void findNormalVector()
+	{
+		for (int i = 0; i < TriangleScript.triangleInstance.IndAmount; i += 3)
+    	{
+        	Vector3 v1 = TriangleScript.triangleInstance.Vertices[TriangleScript.triangleInstance.Indices[i + 1]] - TriangleScript.triangleInstance.Vertices[TriangleScript.triangleInstance.Indices[i]];
+        	Vector3 v2 = TriangleScript.triangleInstance.Vertices[TriangleScript.triangleInstance.Indices[i + 2]] - TriangleScript.triangleInstance.Vertices[TriangleScript.triangleInstance.Indices[i]];
+        	Vector3 normal = Vector3.Cross(v1, v2);
+			Vector3 normalizedNormal = normal;
+			normalizedNormal.Normalize();
+
+			TriangleScript.triangleInstance.triangleNormals.Add(normalizedNormal);
+
+        	//TriangleScript.Instance.Vertices[TriangleScript.Instance.Indices[i]].normal += normal;
+        	//TriangleScript.Instance.Vertices[TriangleScript.Instance.Indices[i + 1]].normal += normal;
+        	//TriangleScript.Instance.Vertices[TriangleScript.Instance.Indices[i + 2]].normal += normal;
+    	}
+
+		//for (int i = 0; i < TriangleScript.Instance.Vertices.size(); i++)
+    	//{
+       	//	TriangleScript.Instance.Vertices[i].normal = glm::normalize(TriangleScript.Instance.Vertices[i].normal);
+    	//}
 	}
 }
