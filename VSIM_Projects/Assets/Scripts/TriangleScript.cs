@@ -16,7 +16,9 @@ public class TriangleScript : MonoBehaviour
 
     Vector3 NormalVector = new Vector3(0.0f, 0.0f, 0.0f);
     List<Vector3> Vertices = new List<Vector3>();
+    int VertAmount;
     List<int> Indices = new List<int>();
+    int IndAmount;
     // Start is called before the first frame update
     void Awake()
     {
@@ -81,6 +83,8 @@ public class TriangleScript : MonoBehaviour
             Vertices.Add(Vertex);
         }
 
+        VertAmount = Vertices.Count;
+
     }
 
     void FetchIndices()
@@ -93,6 +97,8 @@ public class TriangleScript : MonoBehaviour
         {
             Indices.Add(int.Parse(indLines[i]));
         }
+
+        IndAmount = Indices.Count;
     }
 
     private void OnDrawGizmos() 
