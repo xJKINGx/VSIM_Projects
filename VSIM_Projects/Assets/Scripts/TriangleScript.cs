@@ -28,12 +28,12 @@ public class TriangleScript : MonoBehaviour
 
         FetchVertices();
         FetchIndices();
-        //Debug.Log("VERTICES:");
+        Debug.Log("VERTICES:");
         for (int i = 0; i < Vertices.Count; i++)
         {
             Debug.Log("(" + Vertices[i][0] + ", " + Vertices[i][1] + ", " + Vertices[i][2] + ")");
         }
-        //Debug.Log("INDICES:");
+        Debug.Log("INDICES:");
         for (int i = 0; i < Indices.Count; i++)
         {
             Debug.Log(Indices[i]);
@@ -95,12 +95,21 @@ public class TriangleScript : MonoBehaviour
         string indText = TriangleIndices.text;
 
         List<string> indLines = indText.Split(new string[] {"\r\n", "\r", "\n"}, StringSplitOptions.RemoveEmptyEntries).ToList<string>();
-
+        List<string> stringIndices = new List<string>();
+        Debug.Log("indLines size: " + indLines.Count);
         for (int i = 0; i < indLines.Count; i++)
         {
-            Indices.Add(int.Parse(indLines[i]));
-        }
+            stringIndices = indLines[i].Split(new char[] {','}, StringSplitOptions.RemoveEmptyEntries).ToList<string>();
+            Debug.Log("stringIndices size: " + stringIndices.Count);
+            for(int j = 0; j < stringIndices.Count; j++)
+            {
+                int x = int.Parse(stringIndices[j]);
+                Indices.Add(x);
+            }
+            
 
+        }
+        Debug.Log("total indices: " + Indices.Count);
         IndAmount = Indices.Count;
     }
 
@@ -119,4 +128,42 @@ public class TriangleScript : MonoBehaviour
             Gizmos.DrawLine(Vertices[Indices[i + 2]], Vertices[Indices[i]]);
         }
     }
+}
+
+public class Triangle
+{
+    float lowestY;
+    List<Vector3> mVertices = new List<Vector3>();
+    List<Vector3> mIndices = new List<Vector3>();
+
+    Vector3 NormalVector = new Vector3();
+    Vector3 UnitNormalVector = new Vector3();
+
+    int[] neighbors = new int[3];
+
+    public void NormalizeNormal()
+    {
+        UnitNormalVector = NormalVector;
+        UnitNormalVector.Normalize();
+    }
+
+    public void FindLowestNeighbor()
+    {
+        for (int i = 0; i < mVertices.Count; i++)
+        {
+            if (i == 0)
+            {
+                lowestY = mVertices[0].y;
+            }
+            else
+            {
+                if (mVertices[i].y < lowestY)
+                {
+                    lowestY = mVertices[i].y;
+                }
+            }
+        }
+    }
+
+
 }

@@ -259,6 +259,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TriangleVertices: {fileID: 4900000, guid: b782aa1121db4804f95437aaace49ab3, type: 3}
   TriangleIndices: {fileID: 4900000, guid: 768b246f6bdd4fc48ab1686b93b9fac5, type: 3}
+  Vertices:
+  - {x: 0, y: 12, z: 0}
+  - {x: 56, y: 8, z: 0}
+  - {x: 0, y: 0.5, z: 56}
+  - {x: 56, y: 9, z: 56}
+  - {x: 0, y: 0.5, z: 112}
+  - {x: 56, y: 11.5, z: 112}
+  VertAmount: 6
+  Indices: 000000000200000001000000010000000200000003000000020000000500000003000000020000000400000005000000
+  IndAmount: 12
+  triangleNormals: []
 --- !u!4 &326042656
 Transform:
   m_ObjectHideFlags: 0
