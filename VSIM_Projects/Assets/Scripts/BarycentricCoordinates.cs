@@ -7,7 +7,7 @@ public class BarycentricCoordinates : MonoBehaviour
 {
 	public static BarycentricCoordinates barycInstance; 
 
-	float HeightFromBaryc(Vector2 playerPos)
+	public float HeightFromBaryc(Vector2 playerPos)
 	{
 		Vector3 v0 = new Vector3();
 		Vector3 v1 = new Vector3(); 
