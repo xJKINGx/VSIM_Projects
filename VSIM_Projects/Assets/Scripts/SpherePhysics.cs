@@ -8,7 +8,9 @@ using UnityEngine;
 
 public class SpherePhysics : MonoBehaviour
 {
-    [SerializeField] float SphereRadius = 1.0f;
+    public static SpherePhysics sphereInstance; 
+
+    [SerializeField] public float SphereRadius = 1.0f;
     [SerializeField] float SphereWeight = 1.0f;
 
     public float gravity = -9.81f;
