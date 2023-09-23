@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BarycentricCoordinates : MonoBehaviour
 {
-	//public static BarycentricCoordinates barycInstance; 
+	public static BarycentricCoordinates barycInstance; 
 
 	float HeightFromBaryc(Vector2 playerPos)
 	{
