@@ -7,6 +7,9 @@ public class BarycentricCoordinates : MonoBehaviour
 {
 	public static BarycentricCoordinates barycInstance; 
 
+	private void Start() {
+		findNormalVectors();
+	}
 	public float HeightFromBaryc(Vector2 playerPos)
 	{
 		Vector3 v0 = new Vector3();
@@ -60,7 +63,7 @@ public class BarycentricCoordinates : MonoBehaviour
 		return tempBaryc;
 	}
 
-	void findNormalVector()
+	void findNormalVectors()
 	{
 		for (int i = 0; i < TriangleScript.triangleInstance.IndAmount; i += 3)
     	{
