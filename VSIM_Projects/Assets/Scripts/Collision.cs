@@ -20,6 +20,7 @@ public class Collision : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Get me dem values
         centre = collisionObject.transform.position;
         barycVector = collisionObject.transform.position;
         barycVector.y = BarycentricCoordinates.barycInstance.HeightFromBaryc(new Vector2(collisionObject.transform.position.x, collisionObject.transform.position.z));
@@ -32,6 +33,7 @@ public class Collision : MonoBehaviour
     	}
         collisionPoint = centre + (Vector3.Dot(barycVector - centre, triangleUnitNormal)) * triangleUnitNormal;
 
+        // Are we colliding?
         if (Mathf.Abs(Vector3.Dot(barycVector - centre, triangleUnitNormal)) < SpherePhysics.sphereInstance.SphereRadius)
         {
             centre += Vector3.Dot(collisionPoint + SpherePhysics.sphereInstance.SphereRadius, triangleUnitNormal); // <--- ?????
