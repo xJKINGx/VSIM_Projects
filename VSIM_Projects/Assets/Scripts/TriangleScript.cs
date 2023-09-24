@@ -148,6 +148,7 @@ public class Triangle
     {
         UnitNormalVector = NormalVector;
         UnitNormalVector.Normalize();
+        Debug.Log($"Triangle unit normal: {UnitNormalVector} | Length: {UnitNormalVector.magnitude}");
     }
 
     void GetNormalVectors()
@@ -156,6 +157,7 @@ public class Triangle
         Vector3 v2 = mVertices[2] - mVertices[0];
         Vector3 normal = Vector3.Cross(v1, v2);
         NormalVector = normal;
+        Debug.Log($"Triangle normal: {NormalVector} | Length: {NormalVector.magnitude}");
     }
 
     public bool IsInTriangle(Vector3 ballPos)
@@ -173,6 +175,15 @@ public class Triangle
 		{
             return false;
 		}
+
+        for (int i = 0; i < TriangleScript.triangleInstance.madeTriangles.Count; i++)
+        {
+            if (this == TriangleScript.triangleInstance.madeTriangles[i])
+            {
+                Debug.Log($"Ball over current triangle: {i}");
+            }
+        }
+
 
         return true;
 	}

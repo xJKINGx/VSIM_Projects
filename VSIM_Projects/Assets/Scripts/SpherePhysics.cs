@@ -39,11 +39,7 @@ public class SpherePhysics : MonoBehaviour
         transform.position += Velocity * Time.fixedDeltaTime;
 
         Acceleration = Vector3.down * gravity * SphereWeight;
-
-        //Vector3 Force = Vector3.down * gravity + triangleRef.UnitNormalVector;
-        //Acceleration += Force * SphereWeight;
-        //Velocity += Acceleration;
-
+        
         if (triangleRef != null)
         {
             // Velocity after collision
@@ -51,19 +47,18 @@ public class SpherePhysics : MonoBehaviour
             float velNorm = Vector3.Dot(triangleRef.UnitNormalVector, colVel);
             colVel += -velNorm * triangleRef.UnitNormalVector;
 
-            //Vector3 colPos = transform.position + triangleRef.UnitNormalVector * 
-            //    (sphereInstance.SphereRadius - (Vector3.Dot(Collision.ColInstance.collisionPoint - transform.position, triangleRef.UnitNormalVector)));
             Velocity = colVel;
-            //transform.position = colPos;
+
         }
        
         transform.position = new Vector3(transform.position.x, BarycentricCoordinates.barycInstance.HeightFromBaryc(new Vector2(transform.position.x, transform.position.z)) + sphereInstance.SphereRadius, transform.position.z);
         
+        // Debug logs code originally from Mathias Mohn Mørch
+        Debug.LogWarning($"Velocity : {Velocity} | Length : {Velocity.magnitude}");
+        Debug.LogWarning($"Position : {transform.position} | Length : {Velocity.magnitude}");
+            
+        Acceleration = (Velocity - startVel) / Time.deltaTime;
+        Debug.LogWarning($"Acceleration : {Acceleration} | Length : {Acceleration.magnitude}");        
+
     }  
-
-    // Since we have no rigidbody we need to calculate the movement ourselves
-    void Move()
-    {
-
-    }
 }

@@ -30,26 +30,19 @@ public class Collision : MonoBehaviour
         // Get me dem values
         barycVector = collisionObject.transform.position;
         barycVector.y = BarycentricCoordinates.barycInstance.HeightFromBaryc(new Vector2(collisionObject.transform.position.x, collisionObject.transform.position.z));
-/*         for (int i = 0; i < TriangleScript.triangleInstance.triangleNormals.Count; i++)
-    	{
-        	if (i == BarycentricCoordinates.barycInstance.currentTriangle)
-            {
-                triangleUnitNormal = TriangleScript.triangleInstance.triangleNormals[i];
-            }
-    	} */
+
         if (CurrentTriangle != null)
         {
             collisionPoint = centre + (Vector3.Dot(barycVector - centre, CurrentTriangle.UnitNormalVector)) * CurrentTriangle.UnitNormalVector;
         }
         
 
-        // Are we colliding?
+/*         // Are we colliding?
         if (Mathf.Abs(Vector3.Dot(barycVector - centre, CurrentTriangle.UnitNormalVector)) < SpherePhysics.sphereInstance.SphereRadius)
-        {
-            Debug.Log("bababooey");
+        
             //collisionObject.transform.position = new Vector3(collisionObject.transform.position.x, barycVector.y, collisionObject.transform.position.z);
             //centre += Vector3.Dot(collisionPoint + SpherePhysics.sphereInstance.SphereRadius, triangleUnitNormal); // <--- ?????
-        }
+        } */
     }
 
     Triangle CheckCurrentTriangle()
@@ -58,12 +51,12 @@ public class Collision : MonoBehaviour
         {
             if (TriangleScript.triangleInstance.madeTriangles[i].IsInTriangle(centre))
             {
-                Debug.Log("Found triangle");
+                //Debug.Log("Found triangle");
                 return TriangleScript.triangleInstance.madeTriangles[i];
             }
         }
 
-        Debug.LogWarning("Could not find triangle");
+        //Debug.LogWarning("Could not find triangle");
         return null;
         
     }
