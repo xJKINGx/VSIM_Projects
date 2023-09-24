@@ -37,8 +37,6 @@ public class SpherePhysics : MonoBehaviour
         Vector3 startVel = Velocity;
         Velocity += Vector3.down * gravity * Time.fixedDeltaTime;
         transform.position += Velocity * Time.fixedDeltaTime;
-
-        Acceleration = Vector3.down * gravity * SphereWeight;
         
         if (triangleRef != null)
         {
