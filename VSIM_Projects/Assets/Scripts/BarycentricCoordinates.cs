@@ -1,15 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class BarycentricCoordinates : MonoBehaviour
 {
-	public static BarycentricCoordinates barycInstance; 
-	public int currentTriangle;
+	public static BarycentricCoordinates barycInstance { get; private set; }
 
-	private void Start() {
-		findNormalVectors();
+	private void Awake() 
+	{
+		barycInstance = this;
 	}
 	public float HeightFromBaryc(Vector2 playerPos)
 	{
@@ -34,12 +33,11 @@ public class BarycentricCoordinates : MonoBehaviour
 
 			if (baryc.x >= 0 && baryc.y >= 0 && baryc.z >= 0)
 			{
-				currentTriangle = i;
 				break;
 			}
 		}
 
-		float height = v0.y * baryc.x + v1.y * baryc.y + v2.y * baryc.z;
+		float height = v2.y * baryc.x + v0.y * baryc.y + v1.y * baryc.z;
 		
 		return height;
 	}
@@ -63,28 +61,5 @@ public class BarycentricCoordinates : MonoBehaviour
 		Vector3 tempBaryc = new Vector3(u, v, w);
 
 		return tempBaryc;
-	}
-
-	void findNormalVectors()
-	{
-		for (int i = 0; i < TriangleScript.triangleInstance.IndAmount; i += 3)
-    	{
-        	Vector3 v1 = TriangleScript.triangleInstance.Vertices[TriangleScript.triangleInstance.Indices[i + 1]] - TriangleScript.triangleInstance.Vertices[TriangleScript.triangleInstance.Indices[i]];
-        	Vector3 v2 = TriangleScript.triangleInstance.Vertices[TriangleScript.triangleInstance.Indices[i + 2]] - TriangleScript.triangleInstance.Vertices[TriangleScript.triangleInstance.Indices[i]];
-        	Vector3 normal = Vector3.Cross(v1, v2);
-			Vector3 unitNormal = normal;
-			unitNormal.Normalize();
-
-			TriangleScript.triangleInstance.triangleNormals.Add(unitNormal);
-
-        	//TriangleScript.Instance.Vertices[TriangleScript.Instance.Indices[i]].normal += normal;
-        	//TriangleScript.Instance.Vertices[TriangleScript.Instance.Indices[i + 1]].normal += normal;
-        	//TriangleScript.Instance.Vertices[TriangleScript.Instance.Indices[i + 2]].normal += normal;
-    	}
-
-		//for (int i = 0; i < TriangleScript.Instance.Vertices.size(); i++)
-    	//{
-       	//	TriangleScript.Instance.Vertices[i].normal = glm::normalize(TriangleScript.Instance.Vertices[i].normal);
-    	//}
 	}
 }

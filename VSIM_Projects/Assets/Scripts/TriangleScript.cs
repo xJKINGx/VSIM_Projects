@@ -9,10 +9,10 @@ using UnityEngine;
 
 public class TriangleScript : MonoBehaviour
 {
-
+    public static TriangleScript triangleInstance { get; private set; } 
     [SerializeField] TextAsset TriangleVertices;
     [SerializeField] TextAsset TriangleIndices;
-    public static TriangleScript triangleInstance; 
+
     [System.NonSerialized]
     public List<Vector3> Vertices = new List<Vector3>();
     [System.NonSerialized]
@@ -23,12 +23,12 @@ public class TriangleScript : MonoBehaviour
     public int IndAmount;
     [System.NonSerialized]
     public List<Vector3> triangleNormals = new List<Vector3>();
-
     public List<Triangle> madeTriangles = new List<Triangle>();
 
     // Start is called before the first frame update
     void Awake()
     {
+        triangleInstance = this;
         FetchVertices();
         FetchIndices();
         MakeTriangles();
@@ -158,7 +158,7 @@ public class Triangle
         NormalVector = normal;
     }
 
-    bool IsInTriangle(Vector3 ballPos)
+    public bool IsInTriangle(Vector3 ballPos)
 	{
 		Vector3 baryc = new Vector3();
         baryc = BarycentricCoordinates.barycInstance.CalcBarycentricCoords
