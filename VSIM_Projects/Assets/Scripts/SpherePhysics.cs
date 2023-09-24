@@ -49,7 +49,9 @@ public class SpherePhysics : MonoBehaviour
 
         }
        
-        transform.position = new Vector3(transform.position.x, BarycentricCoordinates.barycInstance.HeightFromBaryc(new Vector2(transform.position.x, transform.position.z)) + sphereInstance.SphereRadius, transform.position.z);
+        transform.position = new Vector3(transform.position.x, 
+        BarycentricCoordinates.barycInstance.HeightFromBaryc(new Vector2(transform.position.x, transform.position.z)) + 
+        sphereInstance.SphereRadius, transform.position.z);
         
         // Debug logs code originally from Mathias Mohn Mørch
         Debug.LogWarning($"Velocity : {Velocity} | Length : {Velocity.magnitude}");
