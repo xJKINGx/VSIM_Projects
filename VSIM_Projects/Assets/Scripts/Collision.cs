@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using Unity.Android.Types;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Collision : MonoBehaviour
 {
@@ -36,7 +34,7 @@ public class Collision : MonoBehaviour
         // Are we colliding?
         if (Mathf.Abs(Vector3.Dot(barycVector - centre, triangleUnitNormal)) < SpherePhysics.sphereInstance.SphereRadius)
         {
-            centre += Vector3.Dot(collisionPoint + SpherePhysics.sphereInstance.SphereRadius, triangleUnitNormal); // <--- ?????
+            //centre += Vector3.Dot(collisionPoint + SpherePhysics.sphereInstance.SphereRadius, triangleUnitNormal); // <--- ?????
         }
     }
 }
